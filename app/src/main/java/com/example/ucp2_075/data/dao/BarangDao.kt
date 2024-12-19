@@ -23,5 +23,5 @@ interface BarangDao {
     suspend fun deleteBarang(barang: Barang)
 
     @Update
-    suspend fun updateBaraeng(barang: Barang)
+    suspend fun updateBarang(barang: Barang)
 }

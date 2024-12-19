@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.ucp2_075.data.dao.BarangDao
+import com.example.ucp2_075.data.dao.SupplierDao
 import com.example.ucp2_075.data.entity.Barang
 import com.example.ucp2_075.data.entity.Supplier
 
@@ -11,8 +13,8 @@ import com.example.ucp2_075.data.entity.Supplier
 
 abstract class TokoDatabase : RoomDatabase(){
 
-    abstract fun barangDao(): Barang
-    abstract fun supplierDao(): Barang
+    abstract fun barangDao(): BarangDao
+    abstract fun supplierDao(): SupplierDao
 
     companion object{
         @Volatile

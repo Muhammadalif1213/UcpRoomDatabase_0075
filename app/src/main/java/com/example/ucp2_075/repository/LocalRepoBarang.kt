@@ -4,9 +4,9 @@ import com.example.ucp2_075.data.dao.BarangDao
 import com.example.ucp2_075.data.entity.Barang
 import kotlinx.coroutines.flow.Flow
 
-class LocalRepoBarang(
+class LocalRepoBrg(
     private val barangDao: BarangDao
-): RepoBarang {
+): RepoBrg {
     override suspend fun insertBrg(barang: Barang) {
         barangDao.insertBarang(barang)
     }

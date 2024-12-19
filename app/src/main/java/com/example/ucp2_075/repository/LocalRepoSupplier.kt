@@ -4,9 +4,9 @@ import com.example.ucp2_075.data.dao.SupplierDao
 import com.example.ucp2_075.data.entity.Supplier
 import kotlinx.coroutines.flow.Flow
 
-class LocalRepoSupplier(
+class LocalRepoSup(
     private val supplierDao: SupplierDao
-): RepoSupplier {
+): RepoSup {
     override suspend fun insertSup(supplier: Supplier) {
         supplierDao.insertSupplier(supplier)
     }
