@@ -8,7 +8,7 @@ interface RepoBarang {
 
     fun getAllBarang() : Flow<List<Barang>>
 
-    fun getBarang(id_barang: String) : Flow<List<Barang>>
+    fun getBarang(id_barang: String) : Flow<Barang>
 
     suspend fun deleteBarang(barang: Barang)
 
