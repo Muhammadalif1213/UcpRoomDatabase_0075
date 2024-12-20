@@ -4,8 +4,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.ucp2_075.data.entity.Supplier
 import com.example.ucp2_075.repository.RepoSup
+import kotlinx.coroutines.launch
 
 class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 ){
@@ -28,6 +30,27 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 
     fun saveDataSup(){
         val currentEvent = uiState.supplierEvent
+
+        if (validatesFieldsSup()){
+            viewModelScope.launch {
+                try {
+                    repoSup.insertSup(currentEvent.toSupplierEntity())
+                    uiState = uiState.copy(
+                        snackBarMessage = "Data Supplier Berhasil Di Simpan",
+                        supplierEvent = SupplierEvent(),
+                        isEntryValid =  FormErrorState()
+                    )
+                } catch (e: Exception){
+                    uiState = uiState.copy(
+                        snackBarMessage = "Data Supplier gagal disimpan"
+                    )
+                }
+            }
+        } else{
+            uiState = uiState.copy(
+                snackBarMessage = "Input tidak valid. Periksa kembali data anda."
+            )
+        }
     }
 
     fun resetSnackBarMessage(){
