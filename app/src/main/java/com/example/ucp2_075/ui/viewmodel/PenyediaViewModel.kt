@@ -13,8 +13,14 @@ object PenyediaViewModel{
             HomeAppViewModel(
             )
         }
-    }
+        initializer {
+            InsertSupViewModel(
+                TokoApp().containerApp.repositorySup
+            )
+        }
+    } 
 }
+
 
 fun CreationExtras.TokoApp(): TokoApp =
     (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY]as TokoApp)
