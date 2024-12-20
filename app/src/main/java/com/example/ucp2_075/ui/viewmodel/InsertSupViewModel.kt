@@ -12,6 +12,14 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 
 
 
+data class FormErrorState(
+    val id_sup: String? = null,
+    val namaSup: String? = null,
+    val kontakSup: String? = null,
+    val alamatSup: String? = null
+)
+
+
 fun SupplierEvent.toSupplierEntity(): Supplier = Supplier(
     id_sup = id_sup,
     namaSup = namaSup,
