@@ -13,6 +13,11 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 ){
     var uiState by mutableStateOf(SupUIState())
 
+    fun updateStateSup(supplierEvent: SupplierEvent){
+        uiState = uiState.copy(
+            supplierEvent = supplierEvent
+        )
+    }
 
     private fun validatesFieldsSup(): Boolean{
         val event = uiState.supplierEvent
