@@ -10,7 +10,11 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 
 }
 
-
+data class SupUIState(
+    val supplierEvent: SupplierEvent = SupplierEvent(),
+    val isEntryValid: FormErrorState = FormErrorState(),
+    val snackBarMessage: String? = null
+)
 
 data class FormErrorState(
     val id_sup: String? = null,
