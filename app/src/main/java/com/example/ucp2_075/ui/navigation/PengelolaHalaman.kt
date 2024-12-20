@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ucp2_075.ui.view.HomeAppView
+import com.example.ucp2_075.ui.view.supplier.InsertSupView
 
 @Composable
 fun PengelolaHalaman(
@@ -19,8 +20,23 @@ fun PengelolaHalaman(
         composable(
             route = DestinasiHome.route
         ) { HomeAppView(
-            modifier = modifier
+            modifier = modifier,
+            onNavigateAddSup ={ navController.navigate(DestinasiInsertSup.route)
+            }
         )
+        }
+        composable(
+            route = DestinasiInsertSup.route
+        ) {
+            InsertSupView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier
+            )
         }
     }
 }
