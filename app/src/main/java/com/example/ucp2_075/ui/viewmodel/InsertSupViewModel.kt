@@ -1,14 +1,22 @@
 package com.example.ucp2_075.ui.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.ucp2_075.data.entity.Supplier
 import com.example.ucp2_075.repository.RepoSup
 
 class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
-
 ){
+    var uiState by mutableStateOf(SupUIState())
 
+    fun resetSnackBarMessage(){
+        uiState = uiState.copy(snackBarMessage = null)
+    }
 }
+
+
 
 data class SupUIState(
     val supplierEvent: SupplierEvent = SupplierEvent(),
