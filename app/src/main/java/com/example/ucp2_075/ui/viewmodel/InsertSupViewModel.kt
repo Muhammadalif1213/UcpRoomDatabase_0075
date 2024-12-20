@@ -11,9 +11,29 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
 ){
     var uiState by mutableStateOf(SupUIState())
 
+
+    private fun validatesFieldsSup(): Boolean{
+        val event = uiState.supplierEvent
+        val errorState = FormErrorState(
+            id_sup = if (event.id_sup.isNotEmpty()) null else "ID Supplier tidak boleh kosong",
+            namaSup = if (event.namaSup.isNotEmpty()) null else "Nama Supplier tidak boleh kosong",
+            kontakSup = if (event.kontakSup.isNotEmpty()) null else "Kontak Supplier tidak boleh kosong",
+            alamatSup = if (event.alamatSup.isNotEmpty()) null else "Alamat Supplier tidak boleh kosong",
+        )
+
+        uiState = uiState.copy(isEntryValid = errorState)
+        return  errorState.isValid()
+    }
+
+
+    fun saveDataSup(){
+        val currentEvent = uiState.supplierEvent
+    }
+
     fun resetSnackBarMessage(){
         uiState = uiState.copy(snackBarMessage = null)
     }
+
 }
 
 
@@ -29,7 +49,12 @@ data class FormErrorState(
     val namaSup: String? = null,
     val kontakSup: String? = null,
     val alamatSup: String? = null
-)
+){
+    fun isValid(): Boolean {
+        return id_sup == null && namaSup == null && kontakSup == null &&
+                alamatSup == null
+    }
+}
 
 
 fun SupplierEvent.toSupplierEntity(): Supplier = Supplier(
