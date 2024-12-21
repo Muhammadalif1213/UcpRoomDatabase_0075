@@ -4,6 +4,11 @@ import com.example.ucp2_075.data.entity.Barang
 
 
 
+data class BrgUIState(
+    val barangEvent: BarangEvent = BarangEvent(),
+    val isEntryValid : FormErrorBrgState = FormErrorBrgState(),
+    val snackbarMessage: String? = null
+)
 
 data class FormErrorBrgState(
     val id_barang: String? = null,
