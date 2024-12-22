@@ -15,3 +15,7 @@ object DestinasiInsertSup : AlamatNavigasi{
 object DestinasiListSup: AlamatNavigasi{
     override val route: String = "list_sup"
 }
+
+object DestinasiInsertBrg : AlamatNavigasi{
+    override val route: String = "insert_brg"
+}
