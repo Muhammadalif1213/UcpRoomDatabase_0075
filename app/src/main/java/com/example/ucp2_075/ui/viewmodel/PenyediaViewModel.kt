@@ -1,6 +1,7 @@
 package com.example.ucp2_075.ui.viewmodel
 
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
@@ -18,7 +19,35 @@ object PenyediaViewModel{
                 TokoApp().containerApp.repositorySup
             )
         }
-    } 
+        initializer {
+            ListSupViewModel(
+                TokoApp().containerApp.repositorySup
+            )
+        }
+        initializer {
+            InsertBrgViewModel(
+                TokoApp().containerApp.repositoryBrg
+            )
+        }
+        initializer {
+            ListBrgViewModel(
+                TokoApp().containerApp.repositoryBrg
+            )
+        }
+        initializer {
+            DetailBrgViewModel(
+                createSavedStateHandle(),
+                TokoApp().containerApp.repositoryBrg,
+            )
+        }
+        initializer {
+            UpdateBrgViewModel(
+                createSavedStateHandle(),
+                TokoApp().containerApp.repositoryBrg
+            )
+        }
+
+    }
 }
 
 
