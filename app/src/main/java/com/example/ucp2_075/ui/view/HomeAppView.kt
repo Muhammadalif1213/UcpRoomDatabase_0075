@@ -34,7 +34,10 @@ import com.example.ucp2_075.ui.customWidget.HomeTopBar
 @Composable
 fun HomeAppView(
     modifier: Modifier = Modifier,
-    onNavigateAddSup: () -> Unit
+    onNavigateAddSup: () -> Unit,
+    onNavigateAddBrg: () -> Unit,
+    onNavigateListSup: () -> Unit,
+     onNavigateListBrg: () -> Unit,
 ){
     Scaffold (
         modifier = modifier,
@@ -43,13 +46,20 @@ fun HomeAppView(
         }
     ){ innerPadding ->
 
+
         BodyHome(
             modifier = Modifier.padding(innerPadding),
             onBrgListClick ={
-
+                onNavigateListBrg()
             },
             onAddSupClick = {
                 onNavigateAddSup()
+            },
+            onListSupClick = {
+                onNavigateListSup()
+            },
+            onAddBrgClick = {
+                onNavigateAddBrg()
             }
         )
     }
@@ -60,7 +70,9 @@ fun HomeAppView(
 fun BodyHome(
     modifier: Modifier = Modifier,
     onBrgListClick: () -> Unit,
-    onAddSupClick: () -> Unit
+    onAddSupClick: () -> Unit,
+    onAddBrgClick: () -> Unit,
+    onListSupClick: () -> Unit
 ){
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -74,13 +86,15 @@ fun BodyHome(
                 onClick = onBrgListClick
             )
             CardMenu(
-                namaMenu = "Add Product"
+                namaMenu = "Add Product",
+                onClick = onAddBrgClick
             )
         }
         Row(
         ) {
             CardMenu(
-                namaMenu = "List Supplier"
+                namaMenu = "List Supplier",
+                onClick = onListSupClick
             )
             CardMenu(
                 namaMenu = "AddSupplier",
