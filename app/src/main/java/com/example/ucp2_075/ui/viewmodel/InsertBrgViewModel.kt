@@ -1,10 +1,13 @@
 package com.example.ucp2_075.ui.viewmodel
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ucp2_075.data.entity.Barang
 import com.example.ucp2_075.repository.RepoBrg
 import kotlinx.coroutines.launch
@@ -104,3 +107,14 @@ data class BarangEvent(
     val stok: String = "",
     val nama_sup: String = "",
 )
+
+object ListSup {
+    @Composable
+    fun DataSup(
+        supViewModel: ListSupViewModel = viewModel(factory = PenyediaViewModel.Factory)
+    ): List<String>{
+        val GetAllNamaSup by supViewModel.listUiState.collectAsState()
+        val NamaSup = GetAllNamaSup.listSup.map { it.namaSup }
+        return NamaSup
+    }
+}
