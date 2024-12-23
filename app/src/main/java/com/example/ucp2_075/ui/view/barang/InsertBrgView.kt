@@ -6,15 +6,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +33,7 @@ import com.example.ucp2_075.ui.viewmodel.BarangEvent
 import com.example.ucp2_075.ui.viewmodel.BrgUIState
 import com.example.ucp2_075.ui.viewmodel.FormErrorBrgState
 import com.example.ucp2_075.ui.viewmodel.InsertBrgViewModel
+import com.example.ucp2_075.ui.viewmodel.ListSup
 import com.example.ucp2_075.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
 
@@ -158,19 +167,15 @@ fun FormBarang(
             color = Color.Red
         )
 
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = barangEvent.nama_sup,
-            onValueChange = {
-                onValueChange(barangEvent.copy(nama_sup = it))
+        DropDownTextField(
+            modifier = modifier,
+            selectedValue = barangEvent.nama_sup,
+            label = "Nama Supplier",
+            onValueChangedEvent = {
+                    selectedSup ->
+                onValueChange(barangEvent.copy(nama_sup = selectedSup))
             },
-            label = { Text("Nama Supplier")},
-            isError = errorBrgState.nama_sup != null,
-            placeholder = { Text("Masukan Nama Supplier")}
-        )
-        Text(
-            text = errorBrgState.nama_sup ?: "",
-            color = Color.Red
+            options = ListSup.DataSup()
         )
     }
 }
@@ -199,6 +204,55 @@ fun InsertBodyBrg(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Simpan")
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DropDownTextField(
+    selectedValue: String,
+    options: List<String>,
+    label: String,
+    onValueChangedEvent: (String) -> Unit,
+    modifier: Modifier = Modifier
+){
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { expanded = !expanded},
+        modifier = modifier
+    ) {
+        OutlinedTextField(
+            readOnly = true,
+            value = selectedValue,
+            onValueChange = {},
+            label = { Text(text = label ) },
+            trailingIcon = {
+                ExposedDropdownMenuDefaults.TrailingIcon(
+                    expanded = expanded
+                )
+            },
+            colors = OutlinedTextFieldDefaults.colors(),
+            modifier = Modifier
+                .menuAnchor()
+                .fillMaxWidth()
+        )
+
+        ExposedDropdownMenu(expanded = expanded,
+            onDismissRequest = {expanded = false}) {
+            options.forEach{ option: String ->
+                DropdownMenuItem(
+                    text = { Text(text = option) },
+                    onClick = {
+                        expanded = false
+                        onValueChangedEvent(option)
+                    }
+                )
+            }
         }
     }
 }
