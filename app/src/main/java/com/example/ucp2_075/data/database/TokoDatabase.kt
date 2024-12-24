@@ -24,7 +24,7 @@ abstract class TokoDatabase : RoomDatabase(){
                 Room.databaseBuilder(
                     context,
                     TokoDatabase::class.java,
-                    "TokoDatabase"
+                    "DBToko"
                 )
                     .build().also { Instance = it }
             })
