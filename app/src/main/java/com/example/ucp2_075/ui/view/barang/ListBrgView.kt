@@ -166,6 +166,13 @@ fun CardBrg(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ){
+    val CardColor = when {
+        brg.stok == 0 -> Color.Gray
+        brg.stok in 1..10 -> Color.Red
+        brg.stok > 10 -> Color.Green
+        else -> Color.LightGray
+    }
+
     Card (
         onClick = onClick,
         modifier = modifier
@@ -175,7 +182,7 @@ fun CardBrg(
     ) {
         Box(
             modifier = Modifier
-                .background(color = Color(0xFF42A5F5)) // Cyan color
+                .background(color = CardColor) // Cyan color
                 .fillMaxHeight()
         ){
             Row(
