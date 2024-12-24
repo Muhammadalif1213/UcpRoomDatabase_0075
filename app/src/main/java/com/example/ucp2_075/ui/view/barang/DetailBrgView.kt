@@ -45,7 +45,7 @@ fun DetailBrgView (
     modifier: Modifier = Modifier,
     viewModel: DetailBrgViewModel = viewModel(factory = PenyediaViewModel.Factory),
     onBack: () -> Unit = { },
-    onEditClick: (String) -> Unit = { },
+    onEditClick: (Int) -> Unit = { },
     onDeleteClick: () -> Unit = {}
 ) {
     Scaffold (
@@ -61,7 +61,7 @@ fun DetailBrgView (
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    onEditClick(viewModel.detailBrgUIstate.value.detailBarangUiEvent.id_barang)
+                    onEditClick(viewModel.detailBrgUIstate.value.detailBarangUiEvent.idBarang)
                 },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(16.dp)
@@ -166,7 +166,7 @@ fun ItemDetailBrg(
         Column (
             modifier = Modifier.padding(16.dp)
         ) {
-            ComponentDetailBrg(judul = "ID_Barang", isinya = barang.id_barang)
+            ComponentDetailBrg(judul = "ID_Barang", isinya = barang.idBarang.toString())
             Spacer(modifier = Modifier.padding(4.dp))
 
             ComponentDetailBrg(judul = "Nama Barang", isinya = barang.nama)
@@ -178,7 +178,7 @@ fun ItemDetailBrg(
             ComponentDetailBrg(judul = "Harga", isinya = barang.harga)
             Spacer(modifier = Modifier.padding(4.dp))
 
-            ComponentDetailBrg(judul = "Stok", isinya = barang.stok)
+            ComponentDetailBrg(judul = "Stok", isinya = barang.stok.toString())
             Spacer(modifier = Modifier.padding(4.dp))
 
             ComponentDetailBrg(judul = "Supplier", isinya = barang.nama_sup)

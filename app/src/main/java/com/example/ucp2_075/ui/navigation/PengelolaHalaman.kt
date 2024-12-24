@@ -79,29 +79,29 @@ fun PengelolaHalaman(
                     navController.popBackStack()
                 },
                 onDetailClick = {
-                    id_barang ->
-                    navController.navigate("${DestinasiDetailBrg.route}/$id_barang")
-                    println("PengelolaHalaman: id_barang = $id_barang")
+                        idBarang ->
+                    navController.navigate("${DestinasiDetailBrg.route}/$idBarang")
+                    println("PengelolaHalaman: idBarang = $idBarang")
                 }
             )
         }
         composable(
             DestinasiDetailBrg.routesWithArg,
             arguments = listOf(
-                navArgument(DestinasiDetailBrg.ID_BRG){
+                navArgument(DestinasiDetailBrg.IDBRG){
                     type = NavType.StringType
                 }
             )
         ) {
-            val id_brg = it.arguments?.getString(DestinasiDetailBrg.ID_BRG)
-            id_brg?.let { id_brg ->
+            val idbrg = it.arguments?.getString(DestinasiDetailBrg.IDBRG)
+            idbrg?.let { idbrg ->
                 DetailBrgView(
                     modifier = modifier,
                     onBack = {
                         navController.popBackStack()
                     },
                     onEditClick = {
-                        navController.navigate("${DestinasiUpdateBrg.route}/$it")
+                        navController.navigate("${DestinasiUpdateBrg.route}/$idbrg")
                     },
                     onDeleteClick = {
                         navController.popBackStack()
@@ -112,8 +112,8 @@ fun PengelolaHalaman(
         composable(
             DestinasiUpdateBrg.routesWithArg,
             arguments = listOf(
-                navArgument(DestinasiUpdateBrg.ID_BRG){
-                    type = NavType.StringType
+                navArgument(DestinasiUpdateBrg.IDBRG){
+                    type = NavType.IntType
                 }
             )
         ) {

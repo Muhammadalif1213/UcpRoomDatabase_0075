@@ -77,11 +77,11 @@ data class DetailBrgUiState(
 
 fun Barang.toDetailBrgUiEvent() : BarangEvent{
     return  BarangEvent(
-        id_barang = id_barang,
+        idBarang = idBarang,
         nama = nama,
         deskripsi = deskripsi,
         harga = harga,
-        stok = stok,
+        stok = stok.toString(),
         nama_sup = nama_sup
     )
 }

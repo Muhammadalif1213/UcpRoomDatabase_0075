@@ -15,8 +15,8 @@ class LocalRepoBrg(
         return barangDao.getAllBarang()
     }
 
-    override fun getBrg(id_barang: String): Flow<Barang> {
-        return barangDao.getBarang(id_barang)
+    override fun getBrg(idBarang: Int): Flow<Barang> {
+        return barangDao.getBarang(idBarang)
     }
 
     override suspend fun deleteBrg(barang: Barang) {

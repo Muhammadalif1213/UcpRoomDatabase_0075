@@ -20,11 +20,13 @@ class UpdateBrgViewModel(
     var updateUitate by mutableStateOf(BrgUIState())
         private  set
 
-    private val _id_barang: String = checkNotNull(savedStateHandle[DestinasiDetailBrg.ID_BRG])
+    private val _idBrg: Int = savedStateHandle[DestinasiDetailBrg.IDBRG]
+        ?: throw IllegalArgumentException("ID Barang harus berupa angka dan tidak boleh kosong")
+
 
     init {
         viewModelScope.launch {
-            updateUitate = repoBrg.getBrg(_id_barang)
+            updateUitate = repoBrg.getBrg(_idBrg)
                 .filterNotNull()
                 .first()
                 .toUIStateBrg()
@@ -40,7 +42,6 @@ class UpdateBrgViewModel(
     fun ValidateField(): Boolean{
         val event = updateUitate.barangEvent
         val errorState = FormErrorBrgState(
-            id_barang = if (event.id_barang.isNotEmpty()) null else "ID Barang tidak boleh kosong",
             nama = if (event.nama.isNotEmpty()) null else "Nama barang tidak boleh kosong",
             deskripsi = if (event.deskripsi.isNotEmpty()) null else "Deskripsi tidak boleh kosong",
             harga = if (event.harga.isNotEmpty()) null else "Harga tidak boleh kosong",

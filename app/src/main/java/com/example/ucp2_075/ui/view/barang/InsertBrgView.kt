@@ -94,21 +94,6 @@ fun FormBarang(
     Column {
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
-            value = barangEvent.id_barang,
-            onValueChange = {
-                onValueChange(barangEvent.copy(id_barang = it))
-            },
-            label = { Text("ID Barang")},
-            isError = errorBrgState.id_barang != null,
-            placeholder = { Text("Masukan ID Barang")}
-        )
-        Text(
-            text = errorBrgState.id_barang ?: "",
-            color = Color.Red
-        )
-
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
             value = barangEvent.nama,
             onValueChange = {
                 onValueChange(barangEvent.copy(nama = it))
