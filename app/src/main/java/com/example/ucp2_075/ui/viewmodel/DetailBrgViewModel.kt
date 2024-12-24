@@ -20,9 +20,12 @@ class DetailBrgViewModel(
     savedStateHandle: SavedStateHandle,
     private val repoBrg: RepoBrg,
 ): ViewModel(){
-    private val _id_Barang: String = checkNotNull(savedStateHandle[DestinasiDetailBrg.ID_BRG])
+    private val _idBarangString: String? = savedStateHandle[DestinasiDetailBrg.IDBRG]
 
-    val detailBrgUIstate: StateFlow<DetailBrgUiState> = repoBrg.getBrg(_id_Barang)
+    private val _idBarang: Int = DestinasiDetailBrg.getIdBarangFromArg(_idBarangString)
+        ?: throw IllegalArgumentException("ID Barang tidak valid")
+
+    val detailBrgUIstate: StateFlow<DetailBrgUiState> = repoBrg.getBrg(_idBarang)
         .filterNotNull()
         .map { DetailBrgUiState(
             detailBarangUiEvent = it.toDetailBrgUiEvent(),

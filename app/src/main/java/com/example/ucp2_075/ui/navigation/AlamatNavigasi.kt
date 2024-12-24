@@ -26,10 +26,11 @@ object DestinasiListBrg: AlamatNavigasi{
 
 object DestinasiDetailBrg : AlamatNavigasi {
     override val route = "detail"
-    const val ID_BRG = "id_barang"
-    val routesWithArg = "$route/{$ID_BRG}"
     const val IDBRG = "idBarang"
     val routesWithArg: String get() = "$route/{$IDBRG}"
+    fun getIdBarangFromArg(arg: String?): Int? {
+        return arg?.toIntOrNull()
+    }
 }
 
 object DestinasiUpdateBrg : AlamatNavigasi {
