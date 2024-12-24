@@ -30,10 +30,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ucp2_075.R
 
 @Composable
 fun HomeTopBar(
-
 ){
     Card(
         shape = RectangleShape,
@@ -44,43 +44,51 @@ fun HomeTopBar(
     ) {
         Box(
             modifier = Modifier
-                .background(color = Color(0xFF42A5F5)) // Cyan color
+                .background(color = Color(0xFF42A5F5))
                 .fillMaxHeight()
         ){
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.End
-            ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()){
+
+                Row {
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.Start
+                    ) {
+                        Icon(
+                            Icons.Filled.Menu,
+                            contentDescription = "",
+                            tint = Color.White,
+                            modifier = Modifier.size(30.dp)
+                        )
+                        Spacer(modifier = Modifier.padding(10.dp))
+                        Text(
+                            text = "DJI STORE",
+                            color = Color.White,
+                            style = TextStyle(fontSize = 30.sp), fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            text = "SZ DJI Technology Co., Ltd",
+                            color = Color.White,
+                            style = TextStyle(fontSize = 18.sp)
+                        )
+
+                    }
+                    Image(
+                        painter = painterResource(id = R.drawable.drone),
+                        contentDescription = "DJI Logo",
+                        modifier = Modifier.size(100.dp)
+                    )
+
+                }
 
             }
-            Row {
-                Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start
-                ) {
-                    Icon(
-                        Icons.Filled.Menu,
-                        contentDescription = "",
-                        tint = Color.White,
-                        modifier = Modifier.size(30.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "Inventaris",
-                        color = Color.White,
-                        style = TextStyle(fontSize = 30.sp), fontWeight = FontWeight.ExtraBold
-                    )
-                    Text(
-                        text = "Toko AA dan Zaraaa",
-                        color = Color.White,
-                        style = TextStyle(fontSize = 18.sp)
-                    )
-                }
-            }
+
         }
 
     }

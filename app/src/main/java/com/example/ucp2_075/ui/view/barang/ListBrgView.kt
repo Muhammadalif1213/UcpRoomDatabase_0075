@@ -1,5 +1,6 @@
 package com.example.ucp2_075.ui.view.barang
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,11 +38,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2_075.R
 import com.example.ucp2_075.data.entity.Barang
 import com.example.ucp2_075.data.entity.Supplier
 import com.example.ucp2_075.ui.viewmodel.ListBrgUIstate
@@ -191,7 +194,7 @@ fun CardBrg(
                 modifier = modifier.fillMaxWidth().fillMaxHeight()
             ) {
                 Spacer(modifier = Modifier.padding(4.dp))
-                Icon(imageVector = Icons.Filled.ShoppingCart, contentDescription = "", modifier = Modifier.size(62.dp))
+                Image(painter = painterResource(R.drawable.ddrone), contentDescription = "", Modifier.size(62.dp))
                 Spacer(modifier = Modifier.padding(4.dp))
                 Column (
                     modifier = Modifier.padding(8.dp)
@@ -206,6 +209,16 @@ fun CardBrg(
                             fontSize = 25.sp
                         )
                     }
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Text(
+                            text = brg.idBarang.toString(),
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 18.sp
+                        )
+                    }
                     Spacer(modifier = Modifier.padding(4.dp))
                     Row (
                         modifier = Modifier.fillMaxWidth(),
@@ -215,7 +228,7 @@ fun CardBrg(
                             contentDescription = "")
                         Spacer(modifier = Modifier.padding(4.dp))
                         Text(
-                            text = brg.deskripsi,
+                            text = brg.stok.toString(),
                             fontWeight = FontWeight.Normal,
                             fontSize = 16.sp
                         )
@@ -229,6 +242,19 @@ fun CardBrg(
                         Spacer(modifier = Modifier.padding(4.dp))
                         Text(
                             text = brg.nama_sup,
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 16.sp
+                        )
+                    }
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Icon(imageVector = Icons.Filled.ShoppingCart,
+                            contentDescription = "")
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            text = brg.harga,
                             fontWeight = FontWeight.Normal,
                             fontSize = 16.sp
                         )

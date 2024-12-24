@@ -1,12 +1,16 @@
 package com.example.ucp2_075.ui.view.supplier
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -28,7 +32,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -140,7 +146,7 @@ fun ListSupplier(
             itemContent = { sup ->
                 CardSup(
                     sup = sup,
-                    onClick = {onClick(sup.id_sup)}
+                    onClick = {onClick(sup.idSup.toString())}
                 )
             }
         )
@@ -155,54 +161,76 @@ fun CardSup(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ){
-    Card (
-        onClick = onClick,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
-        Column (
-            modifier = Modifier.padding(8.dp)
+        Card(
+            modifier = modifier
+                .padding(start = 4.dp)
         ){
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = Modifier
+                    .background(color = Color(0xFF42A5F5)) // Cyan color
+                    .fillMaxHeight()
             ){
                 Icon(imageVector = Icons.Filled.Person,
-                    contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = sup.namaSup,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
+                    contentDescription = "", modifier = Modifier.size(95.dp))
             }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+        }
+        Card (
+            onClick = onClick,
+            modifier = modifier
+                .padding(8.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(color = Color(0xFF42A5F5)) // Cyan color
+                    .fillMaxHeight()
             ){
-                Icon(imageVector = Icons.Filled.Call,
-                    contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = sup.kontakSup,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
-            }
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                Icon(imageVector = Icons.Filled.Home,
-                    contentDescription = "")
-                Spacer(modifier = Modifier.padding(4.dp))
-                Text(
-                    text = sup.alamatSup,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
-                )
+                Column (
+                    modifier = Modifier.padding(8.dp)
+                ){
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ){
+                        Text(
+                            text = sup.namaSup,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp
+                        )
+                    }
+                    Spacer(modifier = Modifier.padding(4.dp))
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Icon(imageVector = Icons.Filled.Call,
+                            contentDescription = "")
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            text = sup.kontakSup,
+                            fontSize = 16.sp
+                        )
+                    }
+                    Row (
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ){
+                        Icon(imageVector = Icons.Filled.Home,
+                            contentDescription = "")
+                        Spacer(modifier = Modifier.padding(4.dp))
+                        Text(
+                            text = sup.alamatSup,
+                            fontSize = 16.sp
+                        )
+                    }
+                }
             }
         }
     }
+
 }

@@ -1,10 +1,13 @@
 package com.example.ucp2_075.ui.view.barang
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,8 +29,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2_075.R
 import com.example.ucp2_075.ui.customWidget.TopAppBar
 import com.example.ucp2_075.ui.viewmodel.BarangEvent
 import com.example.ucp2_075.ui.viewmodel.BrgUIState
@@ -57,7 +63,15 @@ fun InsertBrgView(
         }
     }
     Scaffold (
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState)}
+        modifier = modifier,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState)},
+        topBar = {
+            TopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Barang"
+            )
+        }
     ){ padding ->
         Column (
             modifier = Modifier
@@ -65,11 +79,6 @@ fun InsertBrgView(
                 .padding(padding)
                 .padding(16.dp)
         ){
-            TopAppBar(
-                onBack = onBack,
-                showBackButton = true,
-                judul = "Tambah Barang"
-            )
             InsertBodyBrg(
                 uiState = uiState,
                 onValueChange = { updateEvent ->
@@ -91,7 +100,11 @@ fun FormBarang(
     errorBrgState: FormErrorBrgState = FormErrorBrgState(),
     modifier: Modifier = Modifier
 ){
-    Column {
+    Column (
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+    ){
+        Image(painter = painterResource(R.drawable.tambahbarang), contentDescription = "", Modifier.size(250.dp))
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = barangEvent.nama,
@@ -130,7 +143,8 @@ fun FormBarang(
             },
             label = { Text("Harga Barang")},
             isError = errorBrgState.harga != null,
-            placeholder = { Text("Masukan Harga Barang")}
+            placeholder = { Text("Masukan Harga Barang")},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Text(
             text = errorBrgState.harga ?: "",
@@ -145,7 +159,8 @@ fun FormBarang(
             },
             label = { Text("Stok Barang")},
             isError = errorBrgState.stok != null,
-            placeholder = { Text("Masukan Stok Barang")}
+            placeholder = { Text("Masukan Stok Barang")},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Text(
             text = errorBrgState.stok ?: "",

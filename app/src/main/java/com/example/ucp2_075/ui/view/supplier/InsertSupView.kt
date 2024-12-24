@@ -1,10 +1,12 @@
 package com.example.ucp2_075.ui.view.supplier
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -18,9 +20,12 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2_075.R
 import com.example.ucp2_075.ui.customWidget.TopAppBar
 import com.example.ucp2_075.ui.viewmodel.FormErrorState
 import com.example.ucp2_075.ui.viewmodel.InsertSupViewModel
@@ -28,6 +33,16 @@ import com.example.ucp2_075.ui.viewmodel.PenyediaViewModel
 import com.example.ucp2_075.ui.viewmodel.SupUIState
 import com.example.ucp2_075.ui.viewmodel.SupplierEvent
 import kotlinx.coroutines.launch
+
+@Preview(showBackground = true)
+@Composable
+fun cektampilan(){
+    InsertSupView(
+        onBack = {},
+        onNavigate = {}
+    )
+}
+
 
 @Composable
 fun InsertSupView(
@@ -49,7 +64,15 @@ fun InsertSupView(
         }
     }
     Scaffold(
-        snackbarHost = { SnackbarHost(hostState = snackbarHostState)}
+        modifier = modifier,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState)},
+        topBar = {
+            TopAppBar(
+                onBack = onBack,
+                showBackButton = true,
+                judul = "Tambah Suplier"
+            )
+        }
     ) { padding ->
         Column (
             modifier = Modifier
@@ -57,11 +80,6 @@ fun InsertSupView(
                 .padding(padding)
                 .padding(16.dp)
         ) {
-            TopAppBar(
-                onBack = onBack,
-                showBackButton = true,
-                judul = "Tambah Suplier"
-            )
             InsertBodySup(
                 uiState = uiState,
                 onValueChange = {updateEvent ->
@@ -88,6 +106,7 @@ fun FormSupplier(
     Column (
 
     ){
+        Image(painter = painterResource(R.drawable.tambahorang), contentDescription = "")
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = supplierEvent.namaSup,
@@ -111,7 +130,8 @@ fun FormSupplier(
             },
             label = { Text("Kontak Suplier")},
             isError = errorState.kontakSup != null,
-            placeholder = { Text("Masukan Kontak anda")}
+            placeholder = { Text("Masukan Kontak anda")},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
         Text(
             text = errorState.kontakSup ?: "",
