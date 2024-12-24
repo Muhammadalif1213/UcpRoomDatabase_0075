@@ -52,7 +52,7 @@ fun InsertSupView(
         snackbarHost = { SnackbarHost(hostState = snackbarHostState)}
     ) { padding ->
         Column (
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .padding(16.dp)
@@ -88,21 +88,6 @@ fun FormSupplier(
     Column (
 
     ){
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            value = supplierEvent.id_sup,
-            onValueChange = {
-                onValueChange(supplierEvent.copy(id_sup = it))
-            },
-            label = { Text("ID Suplier")},
-            isError = errorState.id_sup != null,
-            placeholder = { Text("Masukan ID anda")}
-        )
-        Text(
-            text = errorState.id_sup ?: "",
-            color = Color.Red
-        )
-
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = supplierEvent.namaSup,

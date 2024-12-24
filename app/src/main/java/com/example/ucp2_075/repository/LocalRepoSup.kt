@@ -15,8 +15,8 @@ class LocalRepoSup(
         return supplierDao.getAllSupplier()
     }
 
-    override fun getSup(id_sup: String): Flow<Supplier> {
-        return supplierDao.getSupplier(id_sup)
+    override fun getSup(idSup: Int): Flow<Supplier> {
+        return supplierDao.getSupplier(idSup)
     }
 
 }

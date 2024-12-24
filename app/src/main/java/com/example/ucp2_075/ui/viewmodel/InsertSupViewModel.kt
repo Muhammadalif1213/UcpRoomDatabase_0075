@@ -22,7 +22,6 @@ class InsertSupViewModel (private val repoSup: RepoSup) : ViewModel(
     private fun validatesFieldsSup(): Boolean{
         val event = uiState.supplierEvent
         val errorState = FormErrorState(
-            id_sup = if (event.id_sup.isNotEmpty()) null else "ID Supplier tidak boleh kosong",
             namaSup = if (event.namaSup.isNotEmpty()) null else "Nama Supplier tidak boleh kosong",
             kontakSup = if (event.kontakSup.isNotEmpty()) null else "Kontak Supplier tidak boleh kosong",
             alamatSup = if (event.alamatSup.isNotEmpty()) null else "Alamat Supplier tidak boleh kosong",
@@ -73,27 +72,25 @@ data class SupUIState(
 )
 
 data class FormErrorState(
-    val id_sup: String? = null,
     val namaSup: String? = null,
     val kontakSup: String? = null,
     val alamatSup: String? = null
 ){
     fun isValid(): Boolean {
-        return id_sup == null && namaSup == null && kontakSup == null &&
+        return namaSup == null && kontakSup == null &&
                 alamatSup == null
     }
 }
 
 
 fun SupplierEvent.toSupplierEntity(): Supplier = Supplier(
-    id_sup = id_sup,
     namaSup = namaSup,
     kontakSup = kontakSup,
     alamatSup = alamatSup
 )
 
 data class SupplierEvent(
-    val id_sup: String = "",
+    val idSup: String = "",
     val namaSup: String = "",
     val kontakSup: String = "",
     val alamatSup: String = ""

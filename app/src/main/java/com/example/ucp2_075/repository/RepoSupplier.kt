@@ -8,5 +8,5 @@ interface RepoSup {
 
     fun getAllSup() : Flow<List<Supplier>>
 
-    fun getSup(id_sup: String): Flow<Supplier>
+    fun getSup(idSup: Int): Flow<Supplier>
 }
